@@ -1,14 +1,8 @@
 # Normative Project Artifacts
 
-This directory is the controlled location for the seven approved v0.1 artifacts. The bootstrap request supplied their titles but **not their contents**. To avoid inventing requirements, each named file currently contains an import notice rather than a reconstruction.
+This directory contains the seven approved v0.1 normative artifacts for the AI Fitness Operations Copilot.
 
-Before any feature, data, security, or product UI implementation:
-
-1. obtain the approved source documents;
-2. replace each notice with a faithful Markdown transcription (or add the approved original file and update this index);
-3. preserve version, authorship/approval metadata, tables, diagrams, and normative language;
-4. have a human reviewer verify fidelity; and
-5. record the import in `ai/logs/` and, if it changes an implementation decision, an ADR.
+They are controlled project sources of truth. Implementation agents must preserve their normative meaning and must not silently reconcile or override genuine conflicts.
 
 ## Documents and precedence
 
@@ -18,4 +12,11 @@ Before any feature, data, security, or product UI implementation:
 4. [Product UX, Design Direction & Design System v0.1](04-product-ux-design-direction-and-design-system-v0.1.md).
 5. [UI Screen Specification v0.1](05-ui-screen-specification-v0.1.md).
 
-This operational precedence is recorded for conflicts; it does not alter any artifact. Escalate genuine conflicts for review.
+This operational precedence exists only to guide conflict handling; it does not rewrite any artifact. Genuine conflicts must be escalated for review.
+
+## Change control
+
+- Do not edit normative artifacts as part of ordinary implementation work.
+- Any proposed normative change must be explicitly reviewed and recorded.
+- ADRs may clarify implementation choices but cannot silently override these documents.
+- Material imports or normative revisions must be recorded in `ai/logs/`.
