@@ -10,7 +10,7 @@ The repository is also an auditable demonstration of AI-native delivery: approve
 
 This is **repository bootstrap only**. It provides a minimal Next.js shell and test/tooling foundation. It does not implement authentication, Supabase integration, database schema or migrations, RLS, synthetic data, business metrics, insights, dashboards, Copilot behavior, or LLM integration.
 
-The seven approved artifacts were named but their contents were not supplied with the bootstrap task. Their repository documents therefore carry explicit import notices and must be replaced with the approved verbatim content before they can guide feature implementation. See [`docs/normative/README.md`](docs/normative/README.md).
+The seven approved v0.1 normative artifacts are now imported under [`docs/normative/`](docs/normative/) and are the project sources of truth for subsequent implementation work.
 
 ## Stack
 
@@ -59,7 +59,7 @@ The example environment file contains no credentials. The current shell needs no
 - `src/app/`: Next.js delivery shell
 - `src/components/`: currently only the bootstrap status component
 - `tests/`: shared unit setup and minimal E2E smoke coverage
-- `docs/normative/`: controlled copies/placeholders for approved artifacts
+- `docs/normative/`: controlled copies of the seven approved v0.1 normative artifacts
 - `docs/adr/`: durable architectural decisions
 - `ai/logs/`: AI-native work audit trail
 - `AGENTS.md`: mandatory operating contract for contributors and agents
