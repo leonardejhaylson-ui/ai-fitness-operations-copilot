@@ -13,7 +13,7 @@ Use the approved documents in `docs/normative/`. Apply them in this order when g
 5. UI Screen Specification v0.1.
 6. Accepted ADRs, which may clarify but must not silently override an approved artifact.
 
-Stop and request review when two approved artifacts genuinely conflict. Never invent missing requirements. The repository copies currently mark their source content as pending import; do not treat those notices as product requirements.
+Stop and request review when two approved artifacts genuinely conflict. Never invent missing requirements. Treat the imported documents in `docs/normative/` as the approved v0.1 sources of truth.
 
 ## Architecture and module boundaries
 
