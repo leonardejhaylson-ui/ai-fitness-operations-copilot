@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "packageManager": "pnpm@10.28.1",
-  "engines": { "node": ">=20.9.0" },
+  "engines": {
+    "node": ">=20.9.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,7 +14,13 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset --local --no-seed",
+    "db:lint": "supabase db lint --local --schema public,private --level warning --fail-on warning",
+    "test:db": "sh scripts/database/test.sh",
+    "test:db:standalone": "sh scripts/database/standalone.sh"
   },
   "dependencies": {
     "next": "15.5.2",
@@ -31,6 +39,7 @@
     "eslint": "9.35.0",
     "eslint-config-next": "15.5.2",
     "jsdom": "26.1.0",
+    "supabase": "2.117.0",
     "tailwindcss": "4.1.13",
     "typescript": "5.9.2",
     "vitest": "3.2.4"
