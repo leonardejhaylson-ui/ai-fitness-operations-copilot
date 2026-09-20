@@ -20,7 +20,11 @@
     "db:reset": "supabase db reset --local --no-seed",
     "db:lint": "supabase db lint --local --schema public,private --level warning --fail-on warning",
     "test:db": "sh scripts/database/test.sh",
-    "test:db:standalone": "sh scripts/database/standalone.sh"
+    "test:db:standalone": "sh scripts/database/standalone.sh",
+    "data:generate": "tsc -p scripts/data/tsconfig.json && node node_modules/.cache/synthetic-data/cli.js",
+    "data:load": "sh scripts/data/load-local.sh",
+    "test:data": "vitest run scripts/data",
+    "test:data:standalone": "pnpm data:generate && sh scripts/database/standalone.sh --synthetic-data"
   },
   "dependencies": {
     "next": "15.5.2",
