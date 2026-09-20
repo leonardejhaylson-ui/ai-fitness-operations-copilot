@@ -22,3 +22,7 @@ Run the same SQL tests in local Supabase or a disposable native PostgreSQL clust
 The schema is independently testable without runtime application code. Two clean standalone databases verify reproducibility. Full Supabase validation still requires Docker; a standalone PASS does not replace that gate. Application authorization, snapshot schema validation, request/response semantic checks and evidence validation remain explicit future responsibilities under Contract §6.2 and §10. Privileged maintenance retains its administrative boundary; normal authenticated roles cannot DELETE or TRUNCATE.
 
 This ADR records implementation choices for review and does not change approved artifacts. No additional domain table, status, index or product flow is introduced.
+
+## Validation and review status
+
+PostgreSQL 17.9 validation passed on two clean databases with identical schema dumps and all SQL integration checks. The implementation confirms the decision; no conceptual blocker was found. Status remains Proposed because the [ADR convention](README.md) requires review before acceptance, and no accepting reviewer is recorded. Full Supabase lifecycle validation remains blocked by unavailable Docker/Podman.

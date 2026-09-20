@@ -17,3 +17,5 @@ Date: 2026-09-20. Scope: migrations, local configuration, SQL tests and test har
 | Source/bundle | No application source changes or secret values introduced. New CLI is development-only. Final browser bundle scan recorded in log 0005. |
 
 Residual validation boundary: native PostgreSQL validates real grants/RLS/constraints but supplies a minimal auth.users fixture boundary. Run the documented Supabase reset/lint/tests on Docker before treating full-stack local validation as complete. Future application authorization and server-only AI writes require their own integration tests; this increment does not claim those capabilities.
+
+Final validation: PostgreSQL 17.9 ran both SQL suites on each of two clean databases, reporting 198 successful checks per database (396 total) and identical schema dumps. All M01–M13 migrations were preserved. Manual contract comparison confirmed the exact nine secondary index definitions, composite tenant-safe FKs, TEXT/CHECK domains, TIMESTAMPTZ, historical guards and active/nondeleted account membership helper. No policy uses ALL or DELETE. Full Supabase validation remains BLOCKED, not a project test failure.

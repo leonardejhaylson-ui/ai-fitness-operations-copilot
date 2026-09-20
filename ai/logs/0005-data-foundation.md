@@ -3,7 +3,7 @@
 - Date: 2026-09-20
 - Scope: local database foundation only; no dataset, engines, UI, AI integration, remote project, production configuration or GitHub Actions.
 - Branch: `codex/data-foundation`, created from updated clean `main` at `2da9a5d2d65eca13a5f44aaa90d013d7ec5ae7e5`.
-- Status: validation in progress; full Supabase runtime BLOCKED by missing Docker/Podman.
+- Status: database foundation validated on PostgreSQL 17.9; application gates PASS; full Supabase runtime BLOCKED by missing Docker/Podman.
 
 ## Objective and sources
 
@@ -58,4 +58,29 @@ Existing Next.js/ESLint deprecation and security notices remain the pre-existing
 
 ## Validation and publication
 
-Final results and any test-driven corrections are recorded below after execution.
+Resumed from checkpoint `0fd3c07` (`wip: preserve data foundation progress`) on the required branch. The working tree was initially clean. Compared `next-env.d.ts` with main and restored only Next.js-generated drift; restored it again after build. No migration, constraint, deny test, application code, normative artifact or Data API configuration needed changes.
+
+| Check | Status | Evidence |
+| --- | --- | --- |
+| test:db:standalone | PASS | PostgreSQL 17.9; M01–M13 applied to two clean databases; both SQL suites passed in each; 198 checks per database, 396 total; schema dumps identical; disposable cluster cleaned up. |
+| db:start | BLOCKED | Attempted again: Docker command not found, Podman also not found. No host installation or configuration change. |
+| db:reset | BLOCKED | Both planned resets require the unavailable local container stack. |
+| db:lint | BLOCKED | Local stack unavailable; prior connection failure documented above. |
+| test:db | BLOCKED | Both planned container test runs require the unavailable local stack. Standalone SQL PASS is separate. |
+| db:stop | NOT REQUIRED | No stack was started in this resumed session. |
+| pnpm install --frozen-lockfile | PASS | pnpm 10.28.1; lockfile up to date; no dependency changes. |
+| lint | PASS | pnpm lint, exit 0. |
+| typecheck | PASS | pnpm typecheck, exit 0. |
+| unit tests | PASS | pnpm test: one test, one file passed. |
+| build | PASS | pnpm build: production compilation, type validation and all four static pages completed, exit 0. |
+| git diff --check | PASS | No whitespace errors. |
+| Playwright | NOT REQUIRED | No application source, UI, route, authentication journey or browser dependency changed relative to main; explicit task exemption applies. |
+| Browser bundle / changed-file scan | PASS | No sensitive credential names or checked key/private-key patterns in .next/static; no checked key patterns in changed files. Pattern scan is not an exhaustive secret detector. |
+
+Final contract review confirmed exactly nine domain tables and no metrics or extra domain tables; all 93 columns match the contract; operational timestamps are TIMESTAMPTZ; domains use TEXT/CHECK; composite FKs preserve tenant/conversation/owner identity; all nine secondary index definitions match the contract. Access records allow only VALID → VOIDED, insights preserve snapshots, messages are append-only, and runs permit only STARTED → terminal updates. All nine tables have RLS, with no ALL or DELETE policies. Authorization uses auth.uid(), ACTIVE membership and an ACTIVE/nondeleted app_user. No normal service_role path, credentials, AI SQL capability or synthetic dataset was added.
+
+ADR 0002 remains Proposed: docs/adr/README.md says acceptance occurs only through review, and no accepting reviewer is recorded. Validation confirms the implementation decision without a conceptual blocker. The agent security review is evidence for the PR, not reviewer acceptance.
+
+Remaining limits: full Supabase Auth/PostgREST/lifecycle validation requires Docker or Podman. The intentional empty api exposure stays unchanged. Future server integration must establish its reviewed RLS-preserving write boundary and application authorization; snapshot semantics/evidence validation remain future increments. Previously recorded dependency follow-up remains outside this change.
+
+Publication: preserve the checkpoint and create `feat: complete database foundation`, push codex/data-foundation, and open `feat: implement database foundation` against main without merging. The PR carries these validation results; publication identifiers are reported in the completion response.
