@@ -1,0 +1,45 @@
+# Local development only. No linked remote project or production configuration.
+project_id = "ai-fitness-operations-copilot"
+
+[api]
+enabled = true
+port = 54321
+# The empty api schema prevents automatic REST/GraphQL exposure of domain tables.
+schemas = ["api"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 54322
+shadow_port = 54320
+major_version = 17
+
+[db.migrations]
+enabled = true
+
+[db.seed]
+enabled = false
+
+[realtime]
+enabled = false
+
+[studio]
+enabled = false
+
+[local_smtp]
+enabled = false
+
+[storage]
+enabled = false
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:3000"
+additional_redirect_urls = []
+enable_signup = false
+
+[analytics]
+enabled = false
+
+[edge_runtime]
+enabled = false

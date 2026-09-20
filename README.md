@@ -8,7 +8,9 @@ The repository is also an auditable demonstration of AI-native delivery: approve
 
 ## Current status
 
-This is **repository bootstrap only**. It provides a minimal Next.js shell and test/tooling foundation. It does not implement authentication, Supabase integration, database schema or migrations, RLS, synthetic data, business metrics, insights, dashboards, Copilot behavior, or LLM integration.
+The repository contains the Next.js tooling foundation and the **local database foundation**: nine contract-defined tables, ordered PostgreSQL migrations, constraints, historical lifecycle guards, RLS, and database integration tests. Application authentication, database adapters, synthetic data, engines, product screens and AI integration remain future increments.
+
+See [local database setup and validation](docs/database-local.md) for Supabase and disposable PostgreSQL commands and their validation boundaries.
 
 The seven approved v0.1 normative artifacts are now imported under [`docs/normative/`](docs/normative/) and are the project sources of truth for subsequent implementation work.
 
@@ -17,7 +19,7 @@ The seven approved v0.1 normative artifacts are now imported under [`docs/normat
 - Next.js App Router, React, and strict TypeScript
 - Tailwind CSS 4 through its PostCSS plugin
 - pnpm
-- PostgreSQL/Supabase and Supabase Auth (approved, not integrated yet)
+- PostgreSQL 17 / Supabase local CLI (database foundation); Supabase Auth application integration pending
 - Vitest, Testing Library, and Playwright
 - Vercel deployment target (not configured in this phase)
 
@@ -53,12 +55,19 @@ The example environment file contains no credentials. The current shell needs no
 | `pnpm test` | Run unit/component tests once |
 | `pnpm test:watch` | Run Vitest in watch mode |
 | `pnpm test:e2e` | Run the minimal Playwright smoke test |
+| `pnpm db:start` / `pnpm db:stop` | Start/stop local Supabase (Docker required) |
+| `pnpm db:reset` | Rebuild the local database without seed |
+| `pnpm db:lint` | Lint the local Supabase database |
+| `pnpm test:db` | Run SQL integration tests in the local Supabase container |
+| `pnpm test:db:standalone` | Run migrations/tests twice in disposable PostgreSQL 17 |
 
 ## Repository map
 
 - `src/app/`: Next.js delivery shell
 - `src/components/`: currently only the bootstrap status component
 - `tests/`: shared unit setup and minimal E2E smoke coverage
+- `supabase/`: local configuration, M01–M13 migrations and M14 SQL tests
+- `scripts/database/`: local-only database validation harnesses
 - `docs/normative/`: controlled copies of the seven approved v0.1 normative artifacts
 - `docs/adr/`: durable architectural decisions
 - `ai/logs/`: AI-native work audit trail
