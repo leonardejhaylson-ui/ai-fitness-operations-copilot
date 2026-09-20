@@ -1,10 +1,14 @@
 import { NextResponse } from 'next/server';
 import { buildDemoCopilotContext } from '@/modules/copilot/context';
 import { askOpenAI } from '@/modules/copilot/gateway';
+import { getAuthenticatedUser } from '@/lib/supabase/server';
 
 const MAX_QUESTION_LENGTH = 1000;
 
 export async function POST(request: Request) {
+  const user = await getAuthenticatedUser();
+  if (!user) return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 });
+
   let body: unknown;
   try {
     body = await request.json();

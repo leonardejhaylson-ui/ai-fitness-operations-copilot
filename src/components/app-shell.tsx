@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { logout } from '@/app/login/actions';
 
 const NAV = [
   ['/overview', 'Visão geral'],
@@ -34,8 +35,8 @@ export function AppShell({ children, insightCount }: { children: ReactNode; insi
         </nav>
 
         <div className="sidebar-footer">
-          <span className="status-dot" />
-          <span>Dados sintéticos · demo</span>
+          <div className="demo-status"><span className="status-dot" /><span>Dados sintéticos · demo</span></div>
+          <form action={logout}><button className="logout-button" type="submit">Sair</button></form>
         </div>
       </aside>
 
