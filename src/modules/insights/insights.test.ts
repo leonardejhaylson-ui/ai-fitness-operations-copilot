@@ -140,8 +140,14 @@ describe('Insight Engine rule boundaries', () => {
     other.metadata.gym_unit_id = 'other';
     expect(() => evaluateInsights(input(metrics(7), other))).toThrow('Cross-tenant');
 
-    const wrongEnd = metrics(30);
-    wrongEnd.metadata.current.end = '2026-09-20T03:00:00.000Z';
+    const wrongEndBase = metrics(30);
+    const wrongEnd: MetricsResult = {
+      ...wrongEndBase,
+      metadata: {
+        ...wrongEndBase.metadata,
+        current: { ...wrongEndBase.metadata.current, end: '2026-09-20T03:00:00.000Z' },
+      },
+    };
     expect(() => evaluateInsights(input(metrics(7), wrongEnd))).toThrow('reference');
 
     expect(() => evaluateInsights({ sevenDay: metrics(7), thirtyDay: metrics(30), members: [] }))
