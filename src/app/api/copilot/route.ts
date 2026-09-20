@@ -2,12 +2,22 @@ import { NextResponse } from 'next/server';
 import { buildDemoCopilotContext } from '@/modules/copilot/context';
 import { askOpenAI } from '@/modules/copilot/gateway';
 import { getAuthenticatedUser } from '@/lib/supabase/server';
+import { checkCopilotRateLimit } from '@/modules/security/rate-limit';
 
 const MAX_QUESTION_LENGTH = 1000;
 
 export async function POST(request: Request) {
   const user = await getAuthenticatedUser();
   if (!user) return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 });
+
+  const forwarded = request.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
+  const rate = checkCopilotRateLimit(`${user.id}:${forwarded}`);
+  if (!rate.allowed) {
+    return NextResponse.json(
+      { error: 'Muitas perguntas em sequência. Tente novamente em instantes.' },
+      { status: 429, headers: { 'Retry-After': String(rate.retryAfterSeconds) } },
+    );
+  }
 
   let body: unknown;
   try {
