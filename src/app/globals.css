@@ -155,3 +155,21 @@ button:focus-visible, a:focus-visible, input:focus-visible { outline: 2px solid 
   .search-field { min-width: 100%; }
   .copilot-layout { grid-template-columns: 1fr; }
 }
+
+
+.copilot-answer { max-width: 760px; margin: 8px auto auto; width: 100%; }
+.copilot-answer h2 { margin: 6px 0 10px; font-size: 22px; line-height: 30px; font-weight: 600; }
+.answer-text { margin: 8px 0 24px; font-size: 16px; line-height: 25px; color: #2D3035; }
+.evidence-block { border-top: 1px solid #D9DDE2; padding-top: 18px; }
+.evidence-block h3 { margin: 0 0 10px; font-size: 14px; font-weight: 600; }
+.evidence-row { display: grid; grid-template-columns: 34px minmax(0,1fr); gap: 10px; padding: 10px 0; border-top: 1px solid #ECEFF2; }
+.evidence-row:first-of-type { border-top: 0; }
+.evidence-row > span { color: #274C77; font-size: 12px; font-weight: 600; }
+.evidence-row strong { font-size: 13px; font-weight: 600; }
+.evidence-row p { margin: 3px 0 0; color: #646A73; font-size: 13px; line-height: 18px; }
+.response-meta { margin: 16px 0 0; color: #646A73; font-size: 12px; }
+.limitation-block { margin-top: 16px; padding: 12px 14px; background: #F6F7F5; border: 1px solid #D9DDE2; border-radius: 6px; }
+.limitation-block strong { font-size: 12px; font-weight: 600; }
+.limitation-block p { margin: 4px 0 0; color: #646A73; font-size: 13px; line-height: 18px; }
+.error-state { padding: 20px 0; }
+.error-state p { color: #646A73; }
